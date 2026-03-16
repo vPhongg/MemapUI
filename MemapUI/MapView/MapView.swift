@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MemapMap
+import MemapPresentation
 
 struct MapView: View {
     
@@ -39,4 +40,34 @@ struct MapView: View {
         }
     }
     
+}
+
+extension MMapItem {
+    func toPresentationModel() -> PlaceInfoViewModel {
+        PlaceInfoViewModel(
+            id: id,
+            name: name,
+            latitude: latitude,
+            longitude: longitude,
+            createdTimestamp: createdTimestamp,
+            imagePath: imagePath,
+            isAdded: isAdded
+        )
+    }
+}
+
+extension Array where Element == PlaceInfoViewModel {
+    func toMMapItems() -> [MMapItem] {
+        return map {
+            MMapItem(
+                id: $0.id,
+                name: $0.name,
+                latitude: $0.latitude,
+                longitude: $0.longitude,
+                createdTimestamp: $0.createdTimestamp,
+                imagePath: $0.imagePath,
+                isAdded: $0.isAdded
+            )
+        }
+    }
 }

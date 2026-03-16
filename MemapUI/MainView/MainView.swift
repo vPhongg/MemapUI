@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MemapPresentation
 
 public struct MainView: View {
     
