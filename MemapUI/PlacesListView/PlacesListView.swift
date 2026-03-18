@@ -10,14 +10,18 @@ import MemapPresentation
 
 struct PlacesListView: View {
     
-    var viewModelWrapper: DefaultPlacesListViewModelWrapper
+    @Bindable var viewModel: AnyMapViewModel
     
     var body: some View {
-        List(viewModelWrapper.places, id: \.id) { item in
+        List(viewModel.places.toModels(), id: \.id) { item in
             Text(item.name ?? .empty)
         }
         .task {
-            viewModelWrapper.viewModel.load()
+            do {
+                try await self.viewModel.load()
+            } catch {
+                print("ABC \(error.localizedDescription)")
+            }
         }
     }
     
