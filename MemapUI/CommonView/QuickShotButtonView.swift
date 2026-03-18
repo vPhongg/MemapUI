@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct QuickShotButtonView: View {
+    @State private var didTapButton: Bool = false
+
+    
     var body: some View {
         ReusableButtonView(
             symbolName: "camera.fill",
@@ -18,8 +21,9 @@ struct QuickShotButtonView: View {
             backgroundOpacity: 0.5,
             didTapButton: {
                 print("did Tap QuickShotButtonView")
+                didTapButton.toggle()
             }
-        )
+        ).sensoryFeedback(.selection, trigger: didTapButton)
     }
 }
 
